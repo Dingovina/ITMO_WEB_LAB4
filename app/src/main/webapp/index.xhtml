@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <h:outputStylesheet name="css/style.css" />
+        <h:outputStylesheet name="css/libs/bootstrap.min.css" />
+        <h:outputScript name="js/index.js" />
+
+        <title>Welcome</title>
+    </h:head>
+    <h:body>
+        <div>
+            <nav id="shapka" class="navbar">
+                <div class="container-fluid">
+                    <a class="nav justify-content-start">Вариант 8932</a>
+                    <h:form>
+                        <h:commandButton styleClass="btn btn-outline-dark" id="goMain" action="goMain" value="GO TO MAIN" />
+                    </h:form>
+                    <a class="nav justify-content-center">Кортыш Константин Олегович</a>
+                    <h:form>
+                        <h:commandButton styleClass="btn btn-outline-dark" id="goIndex" action="goIndex" value="GO TO INDEX" />
+                    </h:form>
+                    <a class="nav justify-content-end">Группа P3218</a>
+                </div>
+            </nav>
+        </div>
+        <div class="row justify-content-center text-center">
+            <div class="col-12">
+                <h1 id="clock" style="font-size: 200px">
+                    
+                </h1>
+            </div>
+        </div>
+        <hr/>
+        <div class="row justify-content-center text-center">
+            <h:form>
+                <h2>Выберите менеджер базы данных</h2>
+                <div class="btn-group row justify-content-evenly" data-toggle="buttons">
+                    <h:selectOneRadio id="dbManager" value="#{dbManager.dbManagers}">
+                        <div class="col-6">
+                            <f:selectItem itemValue="HibernateManager" itemLabel="HIBERNATE"/>
+                        </div>
+                        <div class="col-6">      
+                            <f:selectItem itemValue="JDBCManager" itemLabel="JDBC"/>
+                        </div>
+                    </h:selectOneRadio>
+                </div>
+                <div class="row justify-content-center text-center">
+                    <div class="col-3">
+                        <h:commandButton styleClass="btn btn-success" id="submit" value="Установить" >
+                            <f:ajax execute="@form" />
+                        </h:commandButton>
+                    </div>  
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>

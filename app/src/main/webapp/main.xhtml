@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:ace="http://www.icefaces.org/icefaces/components"
+    lang="ru">
+<h:head>
+    <h:outputStylesheet name="css/style.css" />
+    <h:outputStylesheet name="css/libs/bootstrap.min.css" />
+
+    <h:outputScript name="js/libs/sweetalert2.all.min.js" />
+    <h:outputScript src="https://kit.fontawesome.com/e42952d0e5.js" crossorigin="anonymous"/>
+    <h:outputScript name="js/managers/ajaxManager.js" />
+    <script src="resources/js/main.js" type="module"></script>
+
+    <title>Coordinate Axis</title>
+</h:head>
+<h:body>
+    <div>
+        <nav id="shapka" class="navbar">
+            <div class="container-fluid">
+                <a class="nav justify-content-start">Вариант 8932</a>
+                <h:form>
+                    <h:commandButton styleClass="btn btn-outline-dark" id="goMain" action="goMain" value="GO TO MAIN" />
+                </h:form>
+                <a class="nav justify-content-center">Кортыш Константин Олегович</a>
+                <h:form>
+                    <h:commandButton styleClass="btn btn-outline-dark" id="goIndex" action="goIndex" value="GO TO INDEX" />
+                </h:form>
+                <a class="nav justify-content-end">Группа P3218</a>
+            </div>
+        </nav>
+    </div>
+    <div class="row justify-content-evenly">
+        <div class="col-4">
+            <div>
+                <canvas id="canvas">
+                </canvas>
+            </div>
+            <div>
+                <h:form id="form">
+                    <div class="row justify-content-center text-center">
+                        <div class="col-6">
+                            <h:outputLabel for="x-input" value="X: "/>
+                            <p:inputText id="x-input" value="#{requestPoint.x}" style="text-align: center;"/>
+                            
+                            <p:slider for="x-input"  minValue="-3" maxValue="3" step="0.5" style="width:200px"/>  
+                        </div>
+                        <div class="col-6">
+                            <h:outputLabel for="y-input" value="Y: "/>
+                            <h:inputText id="y-input" value="#{requestPoint.y}" required="true"  style="text-align: center;"
+                            styleClass="form-control">
+                            </h:inputText>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center text-center">
+                        <div class="col-1">
+                            <h:outputLabel for="r-input" value="R: "/>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-center">
+                                <h:selectOneRadio id="r-input" value="#{requestPoint.r}">
+                                    <f:selectItem itemValue="1" itemLabel="1" />
+                                    <f:selectItem itemValue="2" itemLabel="2" />
+                                    <f:selectItem itemValue="3" itemLabel="3" />
+                                    <f:selectItem itemValue="4" itemLabel="4" />
+                                    <f:selectItem itemValue="5" itemLabel="5" />
+                                </h:selectOneRadio>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h:commandButton class="btn btn-success" id="submit" value="Проверить"
+                                action="#{controller.addPoint(requestPoint)}">
+                                <f:ajax onevent="handleAjax" execute="@form" render="history-table" />
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+        <div class="col-7" id="result-table">
+            <h:dataTable value="#{controller.getPoints(timezoneBean)}" var="point"
+            id="history-table" 
+            styleClass="table">
+
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    #{point.x}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+                    #{point.y}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    #{point.r}
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Результат</f:facet>
+                    <h:outputText value="#{point.hit ? 'Попадание' : 'Промах'}" styleClass="text-#{point.hit ? 'success' : 'danger'}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Время</f:facet>
+                    #{point.time}
+                </h:column>
+            </h:dataTable>
+        </div>
+    </div>
+    <!-- Invisible form for handling clicks on canvas -->
+    <h:form id="hidden-form" style="display: none">
+        <h:inputHidden id="x-input" value="#{requestPoint.x}" />
+        <h:inputHidden id="y-input" value="#{requestPoint.y}" />
+        <h:inputHidden id="r-input" value="#{requestPoint.r}" />
+        <h:inputHidden id="drawn-input" value="#{requestPoint.drawn}" />
+        <h:commandButton id="submit"
+            action="#{controller.addPoint(requestPoint)}">
+            <f:ajax onevent="handleAjax" execute="@form" render="history-table" />
+        </h:commandButton>
+    </h:form>
+    <!-- Invisible form for setting timezone -->
+    <h:form id="timezone-form" style="display: none">
+        <h:inputHidden id="timezone-input" value="#{timezoneBean.timezone}" />
+        <h:commandButton id="submit">
+            <f:ajax execute="@form" render="history-table" />
+        </h:commandButton>
+    </h:form>
+</h:body>
+</html>
+
+
