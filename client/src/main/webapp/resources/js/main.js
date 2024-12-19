@@ -34,7 +34,7 @@ document.getElementById("canvas").onclick = function(event) {
     let point = CanvasManager.handleClick(event);
     // TODO call ajax
     $.ajax({
-        url: "http://localhost:8080/points",
+        url: "http://localhost:8080/controller/addPoint",
         method: "POST",
         data: {
             x: point.x,
