@@ -92,7 +92,7 @@ export class CanvasManager {
     }
 
     static updatePonits(point_list){
-        let r = parseFloat(document.querySelector('input[name="form:r-input"]:checked').value);
+        let r = parseFloat(document.querySelector('input[name="r-input"]:checked').value);
         if (!r) r = 1;
         this.draw(r);
         point_list.forEach(point => {
@@ -104,8 +104,7 @@ export class CanvasManager {
         let rect = this.canvas.getBoundingClientRect();
         let x = event.clientX - rect.left - this.W / 2;
         let y = -(event.clientY - rect.top - this.H / 2);    
-        // let r = document.getElementById("form:r-input").value;
-        let r = parseFloat(document.querySelector('input[name="form:r-input"]:checked').value);
+        let r = parseFloat(document.querySelector('input[name="r-input"]:checked').value);
         x = x / this.R * r;
         y = y / this.R * r;
 
