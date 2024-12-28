@@ -70,14 +70,14 @@ export class CanvasManager {
         
     
         // rectangle
-        this.ctx.rect(this.W / 2, this.H / 2, this.R, -this.R / 2);
+        this.ctx.rect(this.W / 2, this.H / 2, this.R / 2, -this.R);
         this.ctx.fill();
     
         // triangle
         this.ctx.beginPath();
         this.ctx.moveTo(this.W / 2, this.H / 2);
-        this.ctx.lineTo(this.W / 2, this.H / 2 + this.R + 1);
-        this.ctx.lineTo(this.W / 2 - this.R - 1, this.H / 2);
+        this.ctx.lineTo(this.W / 2, this.H / 2 + this.R / 2);
+        this.ctx.lineTo(this.W / 2 - this.R / 2, this.H / 2);
         this.ctx.closePath();
         this.ctx.fill();
     }
