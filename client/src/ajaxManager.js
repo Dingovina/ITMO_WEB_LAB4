@@ -27,7 +27,10 @@ export class AjaxManager {
             url: "http://localhost:8081/add",
             method: "POST",
             contentType: "application/json",
-            data: JSON.stringify(props),
+            headers: {
+                "Authorization": "Bearer " + props.token
+            },
+            data: JSON.stringify({x: props.x, y: props.y, r: props.r, drawn: props.drawn}),
             success: function(response) {
                 console.log(response);
                 AjaxManager.updatePoints();

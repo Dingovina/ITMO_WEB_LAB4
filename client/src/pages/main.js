@@ -6,7 +6,7 @@ import { config } from "../config";
 import { AjaxManager } from "../ajaxManager";
 import { useState } from "react";
 
-export default function Main() {
+export default function Main(props) {
   const [points, setPoints] = useState([]);
   const [isInit, setInit] = useState(false);
   const [r, setR] = useState(1);
@@ -39,7 +39,7 @@ export default function Main() {
   );
 
   function addPoint(x, y) {
-    AjaxManager.addPoint({x: x, y: y, r: r, drawn: false});
+    AjaxManager.addPoint({x: x, y: y, r: r, drawn: false, token: props.token});
 
     setTimeout(() => {
       setPoints(AjaxManager.points);
@@ -52,7 +52,7 @@ export default function Main() {
     let y = -(event.clientY - rect.top - config.H / 2);   
     x = x / config.R;
     y = y / config.R;
-    AjaxManager.addPoint({x: x, y: y, r: r, drawn: true});
+    AjaxManager.addPoint({x: x, y: y, r: r, drawn: true, token: props.token});
 
     setTimeout(() => {
       setPoints(AjaxManager.points);

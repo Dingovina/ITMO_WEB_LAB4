@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Shapka() {
+    const navigate = useNavigate();
     return (
         <div>
             <nav id="shapka" className="navbar">
@@ -16,12 +19,12 @@ export default function Shapka() {
             </nav>
         </div>
     );
-}
 
-function goMain(){
-    window.location.href = "http://localhost:8080/main";
-}
-
-function goIndex(){
-    window.location.href = "http://localhost:8080/index";
+    function goMain(){
+        navigate("../main");
+    }
+    
+    function goIndex(){
+        navigate("../index");
+    }
 }

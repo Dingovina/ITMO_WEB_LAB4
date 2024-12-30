@@ -5,7 +5,7 @@ import RRadioButton from "./PointForm/RRadioButton";
 import { useState } from "react";
 
 export default function PointForm(props) {
-    const [x, setX] = useState(0);
+    const [x, setX] = useState(-3);
     const [y, setY] = useState(0);
 
     return (
