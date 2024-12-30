@@ -32,7 +32,12 @@ public class UserService {
         User user = new User();
         user.setEmail(email);
         user.setPassword(hashedPassword);
-        repository.save(user);
+        try {
+            repository.save(user);
+        }
+        catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
 }

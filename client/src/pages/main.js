@@ -10,7 +10,7 @@ export default function Main(props) {
   const [points, setPoints] = useState([]);
   const [isInit, setInit] = useState(false);
   const [r, setR] = useState(1);
-  AjaxManager.updatePoints();
+  AjaxManager.updatePoints({token: props.token});
   if (!isInit) {
     setTimeout(() => {
       setPoints(AjaxManager.points);

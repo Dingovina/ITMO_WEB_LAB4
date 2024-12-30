@@ -6,7 +6,7 @@ export default function Index(props) {
     <div>
       <Shapka />
       <div className="row justify-content-center" style={{ marginTop: "50px" }}>
-        <IndexForm logup={props.logup} login={props.login} emailChange={props.emailChange} passwordChange={props.passwordChange}/>
+        <IndexForm signup={props.signup} login={props.login} emailChange={props.emailChange} passwordChange={props.passwordChange}/>
       </div>
     </div>
   );

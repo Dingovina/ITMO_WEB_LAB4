@@ -9,10 +9,10 @@ export default function IndexForm(props) {
             <PasswordInput onChange={props.passwordChange} />
             <div className="row justify-content-center">
                 <div className="col-4">
-                    <SubmitButton label="LogUp" onClick={props.logup} />
+                    <SubmitButton label="Signup" onClick={props.signup} />
                 </div>
                 <div className="col-4">
-                    <SubmitButton label="LogIn" onClick={props.login} />
+                    <SubmitButton label="Login" onClick={props.login} />
                 </div>
             </div>
         </div>

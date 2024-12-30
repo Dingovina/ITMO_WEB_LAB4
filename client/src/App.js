@@ -9,8 +9,9 @@ import Index from './pages/index';
 import Main from './pages/main';
 import './styles.css';
 import Swal from "sweetalert2";
+import { AjaxManager } from "./ajaxManager";
 
-export default function App(props) {
+export default function App() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [token, setToken] = useState("");
@@ -18,7 +19,7 @@ export default function App(props) {
     return (
         <Router>
             <Routes>
-                <Route exact path="/index" element={<Index logup={logup} login={login} emailChange={emailChange} passwordChange={passwordChange}/>} />
+                <Route exact path="/index" element={<Index signup={signup} login={login} emailChange={emailChange} passwordChange={passwordChange}/>} />
                 <Route exact path="/main" element={
                     <RequireAuth token={token}>
                         <Main token={token}/>
@@ -41,18 +42,12 @@ export default function App(props) {
         return props.children;
       }
 
-    function logup(event) {
-        // AjaxManager.logup
-        console.log(email);
-        console.log(password);
-        setToken("TOKEN");
+    function signup() {
+        AjaxManager.signup({email: email, password: password});
     }
 
-    function login(event) {
-        // AjaxManager.login
-        console.log(email);
-        console.log(password);
-        setToken("TOKEN");
+    function login() {
+        AjaxManager.login({email: email, password: password, setToken: setToken});
     }
 
     function emailChange(e) {
