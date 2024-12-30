@@ -1,24 +1,40 @@
-export class CanvasManager {
-    static canvas = document.getElementById("canvas");
-    static ctx = CanvasManager.canvas.getContext("2d");
-    static DEFAULT_R = 50; 
-    static R = 50;
-    static W = 400;
-    static H = 400;
+import { Component, createRef } from 'react';
+import { config } from '../config';
 
-    static draw(r=1){
+export default class Canvas extends Component{
+    DEFAULT_R = config.DEFAULT_R; 
+    R = config.R;
+    W = config.W;
+    H = config.H;
+    canvas = createRef();
+    ctx = null;
+
+    componentDidMount() {
+      this.draw();
+    }
+    componentDidUpdate() {
+      this.draw(this.props.r);
+    }
+    render() {
+        return (
+            <canvas ref={this.canvas} onClick={this.props.onClick} id="canvas" />
+        );
+    }
+    draw(r=1){
+        this.ctx = this.canvas.current.getContext('2d');
         this.R = r * this.DEFAULT_R;
-        this.canvas.width = this.W;
-        this.canvas.height = this.H;
+        this.canvas.current.width = this.W;
+        this.canvas.current.height = this.H;
         this.ctx.lineWidth = 2;
         this.ctx.strokeStyle = "black";
         this.ctx.fillStyle = "#8E94F2";
     
         this.drawPoligon();
         this.drawAxis();
+        this.updatePonits(r);
     }
 
-    static drawAxis(){
+      drawAxis(){
         
         this.ctx.beginPath();
         this.ctx.moveTo(this.W / 2, 10);
@@ -30,7 +46,7 @@ export class CanvasManager {
         this.drawPointers();
     }
 
-    static drawPointers(){
+      drawPointers(){
         this.ctx.fillStyle = "black";
         this.ctx.font = "10px Arial";
         this.ctx.beginPath();
@@ -56,7 +72,7 @@ export class CanvasManager {
         this.ctx.stroke();
     }
 
-    static drawPoligon(){
+      drawPoligon(){
         
         // circle
         this.ctx.arc(this.W / 2, this.H / 2, this.R, 0, Math.PI / 2, false);
@@ -82,7 +98,7 @@ export class CanvasManager {
         this.ctx.fill();
     }
     
-    static drawPoint(point){
+      drawPoint(point){
         let x = point.x;
         let y = point.y;
         this.ctx.beginPath();
@@ -91,24 +107,11 @@ export class CanvasManager {
         this.ctx.fill();
     }
 
-    static updatePonits(point_list){
-        let r = parseFloat(document.querySelector('input[name="r-input"]:checked').value);
-        if (!r) r = 1;
-        this.draw(r);
+      updatePonits(r){
+        console.log(r, this.props.points);
+        let point_list = this.props.points;
         point_list.forEach(point => {
-            this.drawPoint(point);
+            (point.r == r) && this.drawPoint(point);
         });
     }
-
-    static handleClick(event){
-        let rect = this.canvas.getBoundingClientRect();
-        let x = event.clientX - rect.left - this.W / 2;
-        let y = -(event.clientY - rect.top - this.H / 2);    
-        let r = parseFloat(document.querySelector('input[name="r-input"]:checked').value);
-        x = x / this.R * r;
-        y = y / this.R * r;
-
-        return {x: x, y: y, r: r};
-    }
-        
 }

@@ -10,6 +10,7 @@ settings.gradle.kts
 !**/src/test/**/build/
 
 db.cfg
+node_modules
 
 ### wildfly ###
 /wildfly-preview-34.0.0.Beta1/

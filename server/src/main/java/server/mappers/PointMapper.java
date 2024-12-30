@@ -11,9 +11,9 @@ import server.objects.ResponsePoint;
 public class PointMapper {
     public static PointDTO requestToDTO(RequestPoint requestPoint) {
         PointDTO point = new PointDTO();
-        point.setX(requestPoint.getX());
-        point.setY(requestPoint.getY());
-        point.setR(requestPoint.getR());
+        point.setX(Math.round(requestPoint.getX() * 1000.0) / 1000.0);
+        point.setY(Math.round(requestPoint.getY() * 1000.0) / 1000.0);
+        point.setR(Math.round(requestPoint.getR() * 1000.0) / 1000.0);
         point.setDrawn(requestPoint.isDrawn());
         point.setCreationTime(ZonedDateTime.now());
         return point;
@@ -21,6 +21,7 @@ public class PointMapper {
 
     public static PointDTO modelToDTO(ModelPoint point) {
         PointDTO pointDTO = new PointDTO();
+        pointDTO.setId(point.getId());
         pointDTO.setX(point.getX());
         pointDTO.setY(point.getY());
         pointDTO.setR(point.getR());
@@ -41,6 +42,7 @@ public class PointMapper {
 
     public static ResponsePoint dtoToResponse(PointDTO point) {
         ResponsePoint responsePoint = new ResponsePoint();
+        responsePoint.setId(point.getId());
         responsePoint.setX(point.getX());
         responsePoint.setY(point.getY());
         responsePoint.setR(point.getR());
