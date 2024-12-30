@@ -1,4 +1,4 @@
-package server.objects;
+package server.objects.users;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

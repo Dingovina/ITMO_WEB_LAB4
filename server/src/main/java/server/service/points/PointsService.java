@@ -1,4 +1,4 @@
-package server.service;
+package server.service.points;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import server.mappers.PointMapper;
 import server.model.RepositoryManager;
-import server.objects.ModelPoint;
-import server.objects.PointDTO;
+import server.objects.points.ModelPoint;
+import server.objects.points.PointDTO;
 
 @Service
 public class PointsService {

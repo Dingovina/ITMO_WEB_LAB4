@@ -1,4 +1,4 @@
-package server.objects;
+package server.objects.points;
 
 
 import lombok.Data;

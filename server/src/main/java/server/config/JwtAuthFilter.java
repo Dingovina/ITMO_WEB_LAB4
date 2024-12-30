@@ -1,12 +1,14 @@
-package server;
+package server.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import server.service.JwtHelper;
-import server.service.UserDetailsServiceImpl;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import server.service.users.JwtHelper;
+import server.service.users.UserDetailsServiceImpl;
+
 import java.io.IOException;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,10 +33,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     try {
       String authHeader = request.getHeader("Authorization");
       String token = null;
-      String username = null;
+      String email = null;
       if (authHeader != null && authHeader.startsWith("Bearer ")) {
         token = authHeader.substring(7);
-        username = JwtHelper.extractUsername(token);
+        email = JwtHelper.extractEmail(token);
       }
 //      If the accessToken is null. It will pass the request to next filter in the chain.
 //      Any login and signup requests will not have jwt token in their header, therefore they will be passed to next filter chain.
@@ -43,8 +45,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         return;
       }
 //       If any accessToken is present, then it will validate the token and then authenticate the request in security context
-      if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+      if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
         if (JwtHelper.validateToken(token, userDetails)) {
           UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, null);
           authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

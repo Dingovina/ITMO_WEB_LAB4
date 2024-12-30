@@ -1,4 +1,4 @@
-package server.objects;
+package server.objects.users;
 
 public record LoginResponse(
     String email,

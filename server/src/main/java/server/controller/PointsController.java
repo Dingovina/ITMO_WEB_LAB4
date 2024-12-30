@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import server.mappers.PointMapper;
-import server.objects.PointDTO;
-import server.objects.RequestPoint;
-import server.objects.ResponsePoint;
-import server.service.PointsService;
+import server.objects.points.PointDTO;
+import server.objects.points.RequestPoint;
+import server.objects.points.ResponsePoint;
+import server.service.points.PointsService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")

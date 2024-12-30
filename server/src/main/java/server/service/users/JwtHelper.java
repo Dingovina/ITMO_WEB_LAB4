@@ -1,4 +1,4 @@
-package server.service;
+package server.service.users;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -26,13 +26,13 @@ public class JwtHelper {
             .compact();
     }
 
-    public static String extractUsername(String token) throws Exception {
+    public static String extractEmail(String token) throws Exception {
         return getTokenBody(token).getSubject();
     }
 
     public static Boolean validateToken(String token, UserDetails userDetails) throws Exception {
-        final String username = extractUsername(token);
-        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+        final String email = extractEmail(token);
+        return email.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 
     private static Claims getTokenBody(String token) throws Exception {

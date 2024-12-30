@@ -3,7 +3,7 @@ package server.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import server.objects.RequestPoint;
+import server.objects.points.RequestPoint;
 
 public class PointValidator {
     private final static ArrayList<Double> VALID_X = new ArrayList<Double>(

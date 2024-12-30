@@ -3,10 +3,10 @@ package server.mappers;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-import server.objects.ModelPoint;
-import server.objects.PointDTO;
-import server.objects.RequestPoint;
-import server.objects.ResponsePoint;
+import server.objects.points.ModelPoint;
+import server.objects.points.PointDTO;
+import server.objects.points.RequestPoint;
+import server.objects.points.ResponsePoint;
 
 public class PointMapper {
     public static PointDTO requestToDTO(RequestPoint requestPoint) {

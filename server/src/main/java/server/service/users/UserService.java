@@ -1,8 +1,9 @@
-package server.service;
+package server.service.users;
 
-import server.objects.SignupRequest;
 import server.model.UserRepository;
-import server.objects.User;
+import server.objects.users.SignupRequest;
+import server.objects.users.User;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,6 @@ public class UserService {
         User user = new User();
         user.setEmail(email);
         user.setPassword(hashedPassword);
-        try {
-            repository.save(user);
-        }
-        catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+        repository.save(user);
     }
-
 }

@@ -1,6 +1,6 @@
-package server.service;
+package server.service.points;
 
-import server.objects.PointDTO;
+import server.objects.points.PointDTO;
 
 public class HitManager {
     

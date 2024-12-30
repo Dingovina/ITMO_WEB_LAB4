@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import server.objects.LoginRequest;
-import server.objects.LoginResponse;
-import server.objects.SignupRequest;
-import server.service.JwtHelper;
-import server.service.UserService;
+import server.objects.users.LoginRequest;
+import server.objects.users.LoginResponse;
+import server.objects.users.SignupRequest;
+import server.service.users.JwtHelper;
+import server.service.users.UserService;
 
 @RestController
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package server.service;
+package server.service.points;
 
 import java.time.ZonedDateTime;
 
